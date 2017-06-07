@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .wrapper {
+      margin: 30px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper" id="app">
+
+</div>
+<script src="react.js"></script>
+<script>
+  class LikeButton {
+    constructor(){
+      this.state = {isLiked:false};
+    }
+    handleClick(){
+        const likeTxt = this.ele.querySelector('.like-text');
+        this.state.isLiked = !this.state.isLiked;
+        if(this.state.isLiked){
+            likeTxt.innerHTML = '取消';
+        }else{
+            likeTxt.innerHTML = '点赞';
+        }
+    }
+    render() {
+      let ele = createDOM(`
+                <button class="like-btn">
+                    <span class="like-text">点赞</span>
+                    <span>✌</span>
+                </button>
+              `);
+      ele.addEventListener('click', this.handleClick.bind(this), false);
+      this.ele = ele;
+      return ele;
+    }
+  }
+
+  ReactDOM.render(new LikeButton().render(), document.querySelector('#app'));
+
+</script>
+</body>
+</html>
